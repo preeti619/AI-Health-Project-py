@@ -6,7 +6,7 @@ def get_connection():
         host="sql12.freesqldatabase.com",
         port = 3306,
         user="sql12791305",         # change if needed
-        password="Dk1qdJ3iM5",         # update if your root has a password
+        password="your password",         # update if your root has a password
         database="sql12791305"
     )
 

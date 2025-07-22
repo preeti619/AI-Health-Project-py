@@ -3,10 +3,11 @@ import mysql.connector
 
 def get_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",         # change if needed
-        password="@*@@)^282206pR",         # update if your root has a password
-        database="streamlitprojects"
+        host="sql12.freesqldatabase.com",
+        port = 3306,
+        user="sql12791305",         # change if needed
+        password="Dk1qdJ3iM5",         # update if your root has a password
+        database="sql12791305"
     )
 
 def create_users_table():

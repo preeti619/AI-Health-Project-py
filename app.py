@@ -19,7 +19,7 @@ if not st.session_state.logged_in:
     if st.session_state.page == "Login":
         login.show_login_page()
     else:
-        signup.show_signup()
+        signup.show_signup_page()
 
 # --- LOGGED IN ---
 else:

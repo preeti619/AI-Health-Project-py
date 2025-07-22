@@ -1,18 +1,18 @@
-# login.py
+# pages/login.py
 import streamlit as st
 from utils.db_helper import validate_user
 
 def show_login_page():
     st.title("🔐 Login")
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+
+    username = st.text_input("👤 Username")
+    password = st.text_input("🔑 Password", type="password")
+
     if st.button("Login"):
-        if validate_user(username,password):
+        if validate_user(username, password):
             st.session_state.logged_in = True
             st.session_state.username = username
-            st.success("✅ Login successfully!")
+            st.success("✅ Login successful!")
             st.rerun()
-            st.switch_page("app.py")
-
         else:
-            st.error("❌ Invalid username or password")
+            st.error("❌ Invalid username or password.")

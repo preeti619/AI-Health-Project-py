@@ -1,18 +1,17 @@
 import streamlit as st
-from pages import login,signup
-from pages import feedback
-from pages import report
+from pages import login, signup, feedback, report
 
+st.set_page_config(page_title="AI Health Assistant", layout="centered")
 
-st.set_page_config(page_title="AI Health Assistant",layout= "centered")
-
+# Session state initialization
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
-
 if "page" not in st.session_state:
     st.session_state.page = "Login"
+if "username" not in st.session_state:
+    st.session_state.username = ""
 
-# Choose page
+# --- NOT LOGGED IN ---
 if not st.session_state.logged_in:
     st.sidebar.title("Authentication")
     st.session_state.page = st.sidebar.radio("Choose", ["Login", "Signup"])
@@ -22,27 +21,34 @@ if not st.session_state.logged_in:
     else:
         signup.show_signup()
 
+# --- LOGGED IN ---
 else:
-    st.title("🩺 AI Health Assistant")
+    st.title(f"🩺 Welcome, {st.session_state.username}")
     st.sidebar.title("📌 Navigation")
-    page = st.sidebar.radio("Go to",["chat with Assistant", "Generate Report","Nearby Hospitals", "Feedback", "Logout"])
-    
-    if page == "chat with Assistant":
+
+    page = st.sidebar.radio("Go to", [
+        "Chat with Assistant",
+        "Generate Report",
+        "Nearby Hospitals",
+        "Feedback",
+        "Logout"
+    ])
+
+    if page == "Chat with Assistant":
         from pages import chatbot
         chatbot.show_chatbot_page()
 
     elif page == "Generate Report":
-        from pages import report
         report.show_report_page()
-    
+
     elif page == "Nearby Hospitals":
         from pages import hospital
         hospital.show_hospital_page()
 
     elif page == "Feedback":
-        from pages import feedback
         feedback.show_feedback_page()
 
     elif page == "Logout":
-        st.session_state.logged_in = False
-        st.rerun()
+        for key in list(st.session_state.keys()):
+            del st.session_state[key]  
+        st.rerun() 

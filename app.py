@@ -3,7 +3,6 @@ from pages import login, signup, feedback, report
 
 st.set_page_config(page_title="AI Health Assistant", layout="centered")
 
-# Session state initialization
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 if "page" not in st.session_state:
@@ -11,7 +10,6 @@ if "page" not in st.session_state:
 if "username" not in st.session_state:
     st.session_state.username = ""
 
-# --- NOT LOGGED IN ---
 if not st.session_state.logged_in:
     st.sidebar.title("Authentication")
     st.session_state.page = st.sidebar.radio("Choose", ["Login", "Signup"])
@@ -21,7 +19,6 @@ if not st.session_state.logged_in:
     else:
         signup.show_signup_page()
 
-# --- LOGGED IN ---
 else:
     st.title(f"🩺 Welcome, {st.session_state.username}")
     st.sidebar.title("📌 Navigation")
